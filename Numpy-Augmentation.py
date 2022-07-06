@@ -26,7 +26,11 @@ def HorizontalFlip(img_path):
 def GrayScale(img_path):
     img = Image.open(img_path)
     img_array = np.array(img)  # (187, 270, 3)
-    img_gray = img_array[:,:,0]
+    img_r = img_array[:, :, 0]
+    img_g = img_array[:, :, 1]
+    img_b = img_array[:, :, 2]
+    img_gray = 0.2989 * img_r + 0.5870 * img_g + 0.1140 * img_b
+
     img_gray = Image.fromarray(img_gray)
     img_gray.show()
 # GrayScale('./puppy.jpg')
@@ -40,7 +44,6 @@ def RandomShif(img_path, offset, fill):
     x = random.randrange(-2, 2) # [-2, -1, 0, 1]
     y = random.randrange(-2, 2)
 
-    print('x: ',x, 'y: ', y)
     r_img = img_array[:, :, 0]
     g_img = img_array[:, :, 1]
     b_img = img_array[:, :, 2]
@@ -95,8 +98,6 @@ def RandomCrop(img_path, crop_size, fill=None, padding=None, padding_mode='const
     img_x = img_array.shape[1]
     img_y = img_array.shape[0]
 
-
-
     if padding == None:
         rand_x = random.randrange(0, img_x - crop_size[0])
         rand_y = random.randrange(0, img_y - crop_size[1])
@@ -112,7 +113,6 @@ def RandomCrop(img_path, crop_size, fill=None, padding=None, padding_mode='const
 
         assert (rand_x+crop_size[0]) <= (img_x + (2*padding)), 'Crop_size is Out of X range'
         assert (rand_y+crop_size[0]) <= (img_y + (2*padding)), 'Crop_size is Out of Y range'
-
 
         if padding_mode=='constant':
             r_img = img_array[:, :, 0]
