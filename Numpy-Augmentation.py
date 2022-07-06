@@ -102,7 +102,6 @@ def RandomCrop(img_path, crop_size, fill=None, padding=None, padding_mode='const
         rand_x = random.randrange(0, img_x - crop_size[0])
         rand_y = random.randrange(0, img_y - crop_size[1])
 
-
         crop_area = img_array[rand_y:rand_y+crop_size[1], rand_x:rand_x+crop_size[0]]
         crop_area = Image.fromarray(crop_area)
         crop_area.show()
